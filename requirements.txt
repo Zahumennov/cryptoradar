@@ -1,0 +1,30 @@
+# Web framework
+fastapi[standard]==0.135.3
+uvicorn==0.34.0
+
+# Database
+sqlalchemy==2.0.40
+alembic==1.14.1
+psycopg2-binary==2.9.10
+
+# Validation
+pydantic==2.11.1
+pydantic-settings==2.8.1
+
+# Cache & Queue
+redis==5.2.1
+celery==5.4.0
+
+# HTTP client
+httpx==0.28.1
+
+# Auth
+python-jose==3.3.0
+passlib==1.7.4
+bcrypt==4.2.1
+
+# Telegram
+python-telegram-bot==21.10
+
+# Utils
+python-dotenv==1.1.0
