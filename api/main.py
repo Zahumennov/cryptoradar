@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from shared.database import engine, Base
+from api.models import user, alert
 from api.routes import auth, prices, alerts
 
 
