@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from shared.database import get_db
 from api.models.user import User
-from api.schemas.user import UserCreate, UserResponse, Token, LoginRequest
+from api.schemas.user import UserCreate, UserResponse, Token
 from api.security import hash_password, verify_password, create_access_token
 from api.exceptions import (
     email_taken_exception,
@@ -34,12 +35,15 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=Token)
-def login(login_data: LoginRequest, db: Session = Depends(get_db)):
+def login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db)
+):
     user = db.query(User).filter(
-        User.email == login_data.email
+        User.email == form_data.username
     ).first()
 
-    if not user or not verify_password(login_data.password, user.hashed_password):
+    if not user or not verify_password(form_data.password, user.hashed_password):
         raise invalid_credentials_exception()
 
     if not user.is_active:

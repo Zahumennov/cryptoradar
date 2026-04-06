@@ -28,3 +28,10 @@ def inactive_account_exception() -> HTTPException:
         status_code=status.HTTP_400_BAD_REQUEST,
         detail="Account is inactive",
     )
+
+
+def alert_not_found_exception() -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Alert not found",
+    )
